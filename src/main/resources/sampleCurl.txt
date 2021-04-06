@@ -1,0 +1,12 @@
+curl -X POST http://localhost:8080/users/ -H "Content-Type: application/json" -d "{ \"up
+sertUser\": { \"username\": \"magneto\", \"alias\": \"Magneto\", \"realName\": \"Erik Lehnsherr\", \"bio\": null } }"
+
+curl -X PUT http://localhost:8080/users/1 -H "Content-Type: application/json" -d "{ \"up
+sertUser\": { \"username\": \"magneto\", \"alias\": \"Magneto\", \"realName\": \"Erik Lehnsherr\", \"bio\": \"Magneto was born 'Max Eisenhardt' sometime
+ in the late 1920s to a middle-class German Jewish family. Max's father, Jakob Eisenhardt, was a decorated World War I veteran.\" } }"
+
+curl -X GET http://localhost:8080/users/
+
+curl -X GET http://localhost:8080/users/1
+
+curl -X DELETE http://localhost:8080/users/1

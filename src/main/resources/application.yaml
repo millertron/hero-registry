@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:hero-registry-dev
+    driverClassName: org.h2.Driver
+    username: hero-registry-dev
+    password: hero-registry-dev1
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+  h2:
+    console:
+      enabled: true
+  jackson:
+    serialization:
+      WRAP_ROOT_VALUE: true
+    deserialization:
+      UNWRAP_ROOT_VALUE: true
