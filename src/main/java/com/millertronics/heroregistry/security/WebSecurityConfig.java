@@ -1,6 +1,7 @@
 package com.millertronics.heroregistry.security;
 
 import com.millertronics.heroregistry.security.filter.JwtRequestFilter;
+import com.millertronics.heroregistry.security.services.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,6 +30,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsService;
 
+    @Autowired
+    private JwtService jwtService;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService)
@@ -37,7 +41,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public JwtRequestFilter jwtRequestFilter() throws Exception {
-        return new JwtRequestFilter(authenticationManagerBean(), userDetailsService);
+        return new JwtRequestFilter(authenticationManagerBean(),
+                userDetailsService,
+                jwtService);
     }
 
     @Bean

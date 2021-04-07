@@ -1,5 +1,6 @@
 package com.millertronics.heroregistry.security.filter;
 
+import com.millertronics.heroregistry.security.services.JwtService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,10 +21,14 @@ import java.util.Date;
 public class JwtRequestFilter extends BasicAuthenticationFilter {
 
     private final UserDetailsService userDetailsService;
+    private final JwtService jwtService;
 
-    public JwtRequestFilter(AuthenticationManager authenticationManager, UserDetailsService userDetailsService) {
+    public JwtRequestFilter(AuthenticationManager authenticationManager,
+                            UserDetailsService userDetailsService,
+                            JwtService jwtService) {
         super(authenticationManager);
         this.userDetailsService = userDetailsService;
+        this.jwtService = jwtService;
     }
 
     @Override
@@ -31,8 +36,8 @@ public class JwtRequestFilter extends BasicAuthenticationFilter {
 
         final String authorizationHeader = request.getHeader("Authorization");
 
-        String username = null;
-        String jwt = null;
+        String username;
+        String jwt;
 
         final String bearerPrefix = "Bearer ";
         if (authorizationHeader != null && authorizationHeader.startsWith(bearerPrefix)) {
