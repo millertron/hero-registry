@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/users")
@@ -26,8 +27,11 @@ public class UserController {
     private final UserRepository userRepository;
 
     @GetMapping("/")
-    public List<UserEntity> list() {
-        return userRepository.findAll();
+    public List<BaseUserDto> list() {
+        return userRepository.findAll()
+                .stream()
+                .map(this::convertEntityToDto)
+                .collect(Collectors.toList());
     }
 
     @PostMapping("/")
