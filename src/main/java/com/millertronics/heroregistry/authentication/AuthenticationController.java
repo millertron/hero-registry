@@ -1,7 +1,7 @@
 package com.millertronics.heroregistry.authentication;
 
 import com.millertronics.heroregistry.authentication.dto.AuthenticationRequestDto;
-import com.millertronics.heroregistry.security.CustomUserDetailsService;
+import com.millertronics.heroregistry.security.services.CustomUserDetailsService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.AllArgsConstructor;
@@ -38,6 +38,7 @@ public class AuthenticationController {
 
         final UserDetails userDetails = customUserDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         final long currentTimestamp = System.currentTimeMillis();
+        //TODO: move JWT processing code out of here
         final String jwt = Jwts.builder().setClaims(new HashMap<String, Object>())
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(currentTimestamp))

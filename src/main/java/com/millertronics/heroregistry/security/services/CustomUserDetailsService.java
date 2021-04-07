@@ -1,4 +1,4 @@
-package com.millertronics.heroregistry.security;
+package com.millertronics.heroregistry.security.services;
 
 import com.millertronics.heroregistry.users.repositories.UserRepository;
 import lombok.AllArgsConstructor;
